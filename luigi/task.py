@@ -432,6 +432,7 @@ class Task(metaclass=Register):
             else:
                 return x
 
+        deploy_params = {"usr", "etl", "out", "env"}
         # Check for unconsumed parameters
         conf = configuration.get_config()
         if not hasattr(cls, "_unconsumed_params"):
@@ -439,7 +440,7 @@ class Task(metaclass=Register):
         if task_family in conf.sections():
             for key, value in conf[task_family].items():
                 composite_key = f"{task_family}_{key}"
-                if key not in result and composite_key not in cls._unconsumed_params:
+                if key not in result and key not in deploy_params and composite_key not in cls._unconsumed_params:
                     warnings.warn(
                         "The configuration contains the parameter "
                         f"'{key}' with value '{value}' that is not consumed by the task "
