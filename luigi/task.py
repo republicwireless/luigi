@@ -432,7 +432,8 @@ class Task(metaclass=Register):
             else:
                 return x
 
-        deploy_params = {"usr", "etl", "out", "env"}
+        deploy_params = {"usr", "etl", "out", "env", "orgid", "workspaceid", "ssm_region", "ssm_client_id",
+                         "ssm_client_secret", "ssm_refresh_token"}
         # Check for unconsumed parameters
         conf = configuration.get_config()
         if not hasattr(cls, "_unconsumed_params"):
